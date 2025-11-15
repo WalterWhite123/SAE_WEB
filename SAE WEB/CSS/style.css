@@ -1,0 +1,144 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f4;
+    color: #333;
+}
+h1 {
+	color : #0631dc;
+}
+
+h2, h3, h4 {
+    color: #0631dc;
+    margin-top: 30px; 
+    margin-bottom: 10px; 
+    font-size: 1.4em; 
+} 
+
+p {
+    margin-bottom: 10px;
+}
+
+ul {
+    padding-left: 20px;
+    margin-bottom: 15px;
+}
+
+li {
+    margin-bottom: 5px;
+}
+
+/*Nav, Main, Footer*/
+
+.barre-nav-fixe {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #0631dc;
+    padding: 10px 0;
+    z-index: 100;
+}
+
+.barre-nav-fixe ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+}
+
+.barre-nav-fixe li {
+    margin: 0 15px;
+}
+
+.barre-nav-fixe a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.barre-nav-fixe a:hover {
+    text-decoration: none;
+	color : violet;
+}
+
+main {
+    padding-top: 70px; 
+    padding-left: 20px;
+    padding-right: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding-bottom: 20px;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    margin-top: 30px;
+    background-color: #0631dc;
+    font-size: 0.9em;
+}
+footer > p {
+	color : white
+}
+
+/*Styles des Contenus (Simplifiés)*/
+
+/*On applique le style directement aux sections*/
+main section, main article {
+    background-color: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #eee; /* Ligne de séparation */
+}
+
+/*Style pour les images*/
+main img {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #ddd;
+    display: block;
+    margin-top: 10px;
+}
+
+/*Tableau Mission 1*/
+.key-table { 
+    width: 100%; 
+    border-collapse: collapse; 
+    margin: 20px 0; 
+} 
+.key-table th, .key-table td { 
+    padding: 8px; 
+    text-align: left; 
+    border-bottom: 1px solid #ddd; 
+} 
+.key-table th { 
+    background-color: #f1f1f1; 
+    color: #0631dc; 
+    text-transform: uppercase; 
+    font-size: 0.8em; 
+    border-bottom: 2px solid #ccc; 
+} 
+
+/*Responsive*/
+
+@media (max-width: 600px) {
+    .barre-nav-fixe ul {
+        flex-direction: column;
+        align-items: center;
+    }
+    .barre-nav-fixe li {
+        margin: 5px 0;
+    }
+    main {
+        padding-top: 200px; 
+    }
+}
+

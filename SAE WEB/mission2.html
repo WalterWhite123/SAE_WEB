@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="CSS/mission2-style.css">
+    </head>
+
+    <body>
+        <header>
+            <h1>Mission 2: </h1>
+            <nav>
+                <ul>
+                     <li><a href="accueil.html">Accueil</a></li>
+                     <li><a href="mission1.html">Mission1</a></li>
+                     <li><a href="mission2.html"> Mission2</a></li>
+                     <li><a href="mission3.html">Mission3</a></li>
+                    <li> <a href="conclusion.html">Conclusion</a></li>
+                </ul>
+            </nav>
+        </header>
+        
+        <main>
+            <div class="presentation">
+            <p>L'exploitation de la base de données KDou, réalisée via une interface low-code (visible dans les captures d'écran du document), a permis de répondre à divers besoins métiers.
+Les requêtes effectuées ont démontré la capacité à interroger la base pour :
+ </p>
+    <ul>
+        <li>Extraire des informations ciblées sur des entités, comme la recherche d'un fournisseur spécifique (Jean-Guy Lauzon).</li>
+        <li>Segmenter des listes de données, par exemple en listant tous les clients basés à Paris, triés par société</li>
+        <li>Filtrer le catalogue en croisant des informations de plusieurs tables, comme les produits des États-Unis coûtant moins de 25€ ou ceux d'une catégorie spécifique (viandes/poissons) coûtant plus de 50€.</li>
+        <li>Identifier des relations complexes, comme les clients ayant acheté des viandes ou des poissons .</li>
+        <li>Trouver des enregistrements sans relation, tels que les clients n'ayant jamais passé de commande ou les fournisseurs n'ayant aucun produit au catalogue. </li>
+    </ul>
+    <p>Ce travail d'exploration sert de base à la création d'indicateurs plus stratégiques. L'indicateur suivant s'inscrit dans cette démarche d'analyse pour aider à la prise de décision.</p>
+    </div>
+    <hr>
+            <p id="enonce"> Enoncé: Quels sont les pays des fournisseurs avec le plus de commandes ?</p>
+        
+            <div class="affichage">
+                <div class="code_sql">
+                    <img src="./images/sql_indicateur_mission2.png" alt="code sql de la requete">
+                    <p>Ceci est le code sql de la requête</p>
+                </div>
+                <div class="resultat_sql">
+                    <img src="./images/resultat_indicateur_mission2.png" alt="resultat de la requete">
+                    <p>Ceci est le résultat sur le logiciel de gestion de base de données access</p>
+                </div>
+            </div>
+            <hr>
+            <p>Interprétation : L’analyse des fournisseurs permet de se rendre compte de la délégation des produits de KDou à l’étranger.
+                 Se rendre compte de ces informations permettrait de passer à l’action,
+                 notamment en prenant des fournisseurs plus locaux par exemple pour réduire son empreinte carbone.</p>
+            
+        </main>
+
+        <footer>
+
+        </footer>
+
+    </body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rapport KDou - Mission 3</title>
+    <link rel="stylesheet" href="CSS/style.css"> 
+</head>
+<body>
+
+    <header>
+        <nav class="barre-nav-fixe"> 
+            <ul>
+                <li><a href="accueil.html">Accueil</a></li>
+                <li><a href="mission1.html">Mission 1</a></li>
+                <li><a href="mission2.html">Mission 2</a></li>
+                <li><a href="mission3.html">Mission 3</a></li>
+                <li><a href="conclusion.html">Conclusion</a></li> 
+            </ul>
+        </nav>
+		
+    </header>
+
+    <main>
+        
+        <section>
+		    <h1>MISSION 3 :</h1>
+            <h2>Contexte</h2>
+            <p>La nouvelle version de la base de données KDou , inclut des informations enrichies sur les pays et les coûts des produits. L'objectif est de construire des indicateurs pertinents.</p>
+        </section>
+
+        <article>
+            <h3>Indicateur 1 : Fournisseur hors UE</h3>
+            
+            <p><strong>Énoncé :</strong> Quel est le fournisseur hors UE qui possède le moins de commande ?</p>
+            
+            <p><strong>Interprétation :</strong> Les fournisseurs hors UE de par la distance sont très polluants, ainsi il est dans l’intérêt de l’image eco-friendly de Kdou de prendre des fournisseurs locaux ou nationaux. Trouver le fournisseur hors UE le moins rentable permettra a Kdou de savoir lequel remplacer.</p>
+            <p><strong>Explication de la conception :</strong>Jointures : Nous joignons trois tables : DetailCommande (pour compter les ventes), Produit (pour lier la vente au fournisseur), et Fournisseur (pour obtenir le nom de la société). Filtrage (Sous-requête) : Pour ne garder que les fournisseurs "hors UE", nous utilisons une sous-requête. Cette sous-requête (WHERE Fournisseur.NoFour IN (...)) crée une liste de tous les fournisseurs (NoFour) qui, après jointure avec la table PAYS, ont la valeur "HORS" dans la colonne Pays.UE. Regroupement :  GROUP BY sur Fournisseur.NoFour et Fournisseur.Societe  permet à la fonction COUNT de compter les lignes de commande pour chaque fournisseur séparément. Résultat Final : Nous comptons (COUNT) les lignes de produits dans DetailCommande pour chaque fournisseur filtré. L'instruction ORDER BY trie ce comptage par ordre croissant (du plus petit au plus grand), et TOP 5 nous sélectionne les 5 fournisseurs hors UE avec le moins de commandes. </p>
+            <h4>Code SQL</h4>
+            <img src="images/sql_indicateur1.png" alt="Capture d'écran du code SQL pour l'indicateur 1">
+
+            <h4>Résultat</h4>
+            <img src="images/resultat_indicateur1.png" alt="Capture d'écran du résultat pour l'indicateur 1">
+        </article>
+
+        <article>
+            <h3>Indicateur 2 : Total des ventes par catégorie</h3>
+            
+            <p><strong>Énoncé :</strong> Déterminer le total des ventes pour chaque catégorie de produit.</p>
+            
+            <p><strong>Interprétation :</strong> Cela permet d’identifier les catégories de produits les plus rentables et les plus prisées et s’inscrit dans la démarche d’augmentation de rentabilité de KDou.</p>
+            
+			<p><strong>Explication de la conception :</strong>Jointures : Nous joignons DetailCommande, Produit, et Categorie (avec l'alias C). Cette jointure est nécessaire pour lier la Quantité de chaque vente (de DetailCommande) au CoutAchat du produit (de Produit) et au nom de la catégorie (C.NomCateg). Calcul du Total : La requête calcule SUM(DetailCommande.Quantité * Produit.CoutAchat). Cela représente le coût d'achat total des produits vendus (combien ces produits ont coûté à KDou). L'alias est "TotalVentes", mais il s'agit plus précisément du coût total des marchandises vendues. Regroupement : La clause GROUP BY C.NomCateg  force la fonction SUM à s'exécuter séparément pour chaque catégorie (par ex. "Boissons", "Desserts"...). Résultat Final : La requête affiche le nom de chaque catégorie à côté de la somme totale </p>
+            
+			<h4>Code SQL</h4>
+            <img src="images/sql_indicateur2.png" alt="Capture d'écran du code SQL pour l'indicateur 2">
+
+            <h4>Résultat</h4>
+            <img src="images/resultat_indicateur2.png" alt="Capture d'écran du résultat pour l'indicateur 2">
+        </article>
+
+        <article>
+            <h3>Indicateur 3 : Marge nette moyenne</h3>
+            
+            <p><strong>Énoncé :</strong> Calculer la marge nette moyenne réelle (en pourcentage) pour chaque catégorie de produits vendue sur la période, en prenant en compte l'impact des remises accordées aux clients.</p>
+            
+            <p><strong>Interprétation :</strong> Cette requête permet à KDou d'identifier rapidement les catégories de produits qui génèrent la meilleure rentabilité réelle après déduction des remises...</p>
+
+            <p><strong>Explication de la conception :</strong> Jointures : Nous joignons DetailCommande (DC), Produit (P), et Categorie (Cat) pour avoir toutes les données de calcul (Quantité, Coût d'Achat, Coefficient de Marge, Remise) et le nom de la catégorie.  
+
+                      Calcul du Numérateur (Marge Nette Totale) : Le prix de vente net (après remise) est : P.CoutAchat * Cat.CoefMarge * (1 - DC.[Remise (%)] / 100). Le coût total est : P.CoutAchat. La Marge Nette Totale est SUM(CA Net - Coût Total).  
+
+                      Résultat Final : On divise la Marge Nette Totale par le CA Net Total et on multiplie par 100 pour obtenir le pourcentage.  
+
+                      Regroupement : La clause GROUP BY Cat.NomCateg assure que le calcul est effectué séparément pour chaque type de produit.  </p>
+            
+            <h4>Code SQL</h4>
+            <img src="images/sql_indicateur3.png" alt="Capture d'écran du code SQL pour l'indicateur 3">
+
+            <h4>Résultat</h4>
+            <img src="images/resultat_indicateur3.png" alt="Capture d'écran du résultat pour l'indicateur 3">
+        </article>
+    </main>
+
+    <footer>
+        <p>Rapport SAE S1.04 / R1.02</p>
+    </footer>
+
+</body>
+</html>

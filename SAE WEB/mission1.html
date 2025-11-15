@@ -1,0 +1,86 @@
+<!DOCTYPE html> 
+<html lang="fr"> 
+<head> 
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>Mission 1 : Analyse KDou</title> 
+    <link rel="stylesheet" href="CSS/style.css"> 
+</head> 
+<body> 
+
+    <header>
+        <nav class="barre-nav-fixe"> 
+            <ul>
+                <li><a href="accueil.html">Accueil</a></li>
+                <li><a href="mission1.html">Mission 1</a></li>
+                <li><a href="mission2.html">Mission 2</a></li>
+                <li><a href="mission3.html">Mission 3</a></li>
+                <li><a href="conclusion.html">Conclusion</a></li> 
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+		    <h1>MISSION 1 :</h1>
+            <h2>Contexte et Objectif de l’étude </h2> 
+            <p>La Mission 1 visait à réaliser une première analyse des six tables de la base de données KDou. L'objectif principal était de comprendre la structure et d'évaluer la qualité des données brutes reçues (format Excel), ce qui incluait : dentifier les clés primaires (ou candidates) et les clés étrangères. Étudier les types d'informations représentés dans chaque colonnne. Dresser un bilan des anomalies d'intégrité et de complétude des données.</p> 
+        </section>
+
+        <section>
+            <h2>Identification des Clés (Bilan Structuré)</h2> 
+            <p>Le tableau ci-dessous synthétise l'identification des clés primaires et des relations entre les tables, fruit de l'analyse initiale :</p> 
+            <table class="key-table"> 
+                <thead> 
+                <tr> 
+                    <th>TABLE</th> 
+                    <th>CLÉ PRIMAIRE / CANDIDATE</th> 
+                    <th>CLÉS ÉTRANGÈRES</th> 
+                </tr> 
+                </thead> 
+                <tbody> 
+                <tr><td>FOURNISSEUR</td><td>N° fournisseur</td><td>-</td></tr> 
+                <tr><td>PRODUIT</td><td>Réf produit</td><td>N° fournisseur, Code catégorie</td></tr> 
+                <tr><td>CATÉGORIE</td><td>Code catégorie + Nom Catégorie</td><td>-</td></tr> 
+                <tr><td>CLIENTÈLE</td><td>Code client</td><td>-</td></tr> 
+                <tr><td>COMMANDE</td><td>N° commande</td><td>Code client</td></tr> 
+                <tr><td>DETAIL COMMANDE</td><td>N° commande + Réf produit (Clé Composite)</td><td>N° commande + Réf produit</td></tr> 
+                </tbody> 
+            </table> 
+        </section>
+
+        <section>
+            <h2>Anomalies de Qualité Détectées</h2> 
+            <p>L'étude a révélé plusieurs problèmes de qualité et d'intégrité (exemples concrets) :</p> 
+            <ul> 
+                <li>Intégrité Référentielle : Des valeurs de 'Code catégorie' incohérentes (valeur 9 pour les produits 96 et 127) n'existant pas dans la table 'CATÉGORIE'.</li> 
+                <li>Complétude : Nom de produit manquant (Réf 126), stock absent (Réf 91, 96, 120), adresse client manquante (Code 'CLOAM').</li> 
+                <li>Ambigüité : Colonne 'Port' (Commande) et colonne 'Quantité par unité' (Produit) manquant de précision.</li> 
+                <li>Contrôle de Clé : Difficulté à vérifier l'unicité de la clé composite sur le fichier source Excel pour 'DETAIL COMMANDE'.</li> 
+            </ul> 
+        </section>
+
+        <section>
+            <h2>Perspectives d'Amélioration</h2> 
+                <p>Propositions pour optimiser l'organisation et la qualité des données avant la modélisation :</p> 
+				<ul> 
+					<li>Normalisation : Standardiser les unités et renommer la colonne 'Port' en 'Frais_de_Port'.</li> 
+					<li>Clarté : Remplacer les champs vides par la valeur **NUL** pour les valeurs manquantes.</li> 
+					<li>Contrôle : Créer une colonne composite de contrôle (`<< numéro_de_commande-ref_produit >>`) pour le suivi des doublons sur `DETAIL COMMANDE`.</li> 
+					<li>Correction : Corriger les anomalies d'intégrité référentielle détectées (ex: 'Code catégorie = 9').</li> 
+				</ul> 
+        </section>
+
+        <section>
+            <h2>Conclusion de la Mission 1</h2> 
+            <p>La Mission 1 a permis de dresser un bilan complet de la base de données KDou. Si la structure principale est identifiable, des problèmes d'intégrité référentielle et de complétude des données subsistent. Les perspectives d'amélioration proposées sont essentielles pour garantir une exploitation future fiable et précise de la base, ouvrant la voie à l'interro gation et aux analyses des missions suivantes.</p> 
+        </section>
+
+    </main> 
+    
+    <footer>
+        <p>Rapport SAE S1.04 / R1.02</p>
+    </footer>
+
+</body> 
+</html>
